@@ -1,0 +1,10 @@
+name = "TOGZMQAPIClient"
+uuid = "61579c5e-c86a-4d39-862f-13c65542fb93"
+version = "1.0.0"
+authors = ["1m1 <imi@1m1.io>"]
+
+[deps]
+Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+TOGZMQAPIServer = "f3b3c524-0be3-4e51-a4a9-f5c41e69849d"
+TOGZMQ = "f4a02697-7cd1-461d-8820-6cd877ce326b"
+ZMQ = "c2297ded-f4af-51ae-bb23-16f91089e4e1"
