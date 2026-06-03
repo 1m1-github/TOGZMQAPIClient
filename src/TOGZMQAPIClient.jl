@@ -1,6 +1,7 @@
 module TOGZMQAPIClient
 
-using ZMQ, TOGZMQAPIServer, Serialization, TOGZMQ
+using Serialization, ZMQ
+using TOGZMQAPIServer, TOGZMQ
 
 const SOCKET = Ref{Socket}()
 
@@ -18,7 +19,7 @@ function call(f::Symbol, x...)
     # message = Message(take!(buffer))
     # @show "TOGZMQAPIClient.call", message
     # send(SOCKET[], message)
-    TOGZMQ.send(SOCKET[], TOGZMQAPIServer.APIData(f, x))
+    TOGZMQ.send(SOCKET[], "", false, "", Symbol(""), "", TOGZMQAPIServer.APIData(f, x))
     @show "TOGZMQAPIClient.call, send"
     # deserialize(IOBuffer(recv(SOCKET[])))
     TOGZMQ.recv(SOCKET[])
