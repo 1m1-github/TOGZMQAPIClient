@@ -13,7 +13,7 @@ end
 function call(f::Symbol, x...)
     @show "TOGZMQAPIClient.call", f, x, typeof(x), length(x)
     TOGZMQ.send(SOCKET[], "", false, "", Symbol(""), "", TOGZMQAPIServer.APIData(f, x))
-    _, _, _, _, _, information = TOGZMQ.recv(SOCKET[])
+    _, _, _, _, _, information = TOGZMQ.receive(SOCKET[])
     @show "TOGZMQAPIClient.call", typeof(information), information
     information
 end
