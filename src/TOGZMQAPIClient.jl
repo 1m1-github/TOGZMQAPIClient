@@ -1,22 +1,21 @@
 module TOGZMQAPIClient
 
-using Serialization, ZMQ
+using ZMQ
 using TOGZMQAPIServer, TOGZMQ
 
-const SOCKET = Ref{Socket}()
-
+sleep(socket::Socket) = TOGZMQAPIServer.sleep(socket)
 function awaken(socketlocation)
-    @show "TOGZMQAPIClient.awaken", socketlocation
-    SOCKET[] = Socket(REQ)
-    connect(SOCKET[], socketlocation)
+    # @show "TOGZMQAPIClient.awaken", socketlocation
+    socket = Socket(REQ)
+    connect(socket, socketlocation)
 end
-function call(f::Symbol, x...)
+function call(socket::Socket, f::Symbol, x...)
     # @show "TOGZMQAPIClient.call", f, x, typeof(x), length(x)
-    TOGZMQ.send(SOCKET[], "", false, "", Symbol(""), "", TOGZMQAPIServer.APIData(f, x))
-    _, _, _, _, _, information = TOGZMQ.receive(SOCKET[])
+    TOGZMQ.send(socket, TOGZMQAPIServer.APIData(f, x))
+    _, _, _, _, _, information = TOGZMQ.receive(socket)
     # @show "TOGZMQAPIClient.call", typeof(information) #, information
     information
 end
-call(f::Symbol) = call(f, nothing)
+call(socket::Socket, f::Symbol) = call(socket, f, nothing)
 
 end

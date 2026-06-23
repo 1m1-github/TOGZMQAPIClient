@@ -1,6 +1,6 @@
 name = "TOGZMQAPIClient"
 uuid = "61579c5e-c86a-4d39-862f-13c65542fb93"
-version = "7.0.0"
+version = "8.0.0"
 authors = ["1m1 <imi@1m1.io>"]
 
 [deps]
